@@ -8,6 +8,11 @@
 
 double f(double u);
 void initw(double w[INPUTNO+1]);
+double forward( double w[INPUTNO + 1],
+                double e[INPUTNO]
+              );
+int getdata(double e[][INPUTNO]);
+
 int main()
 {
     double w[INPUTNO + 1]; //重みとしきいち
@@ -16,8 +21,24 @@ int main()
 
     int i,j;
     int n_of_e;
+
     initw(w);
 
+    n_of_e = getdata(e);
+
+    printf("データの個数:%d\n", n_of_e );
+
+    //計算本体
+    for(i=0; i<n_of_e; ++i){
+      printf("%d ", i);
+      for(j=0; j<INPUTNO; ++j){
+        printf("%lf ", e[i][j] );
+      }
+      o=forward(w, e[i]);
+      printf("%lf\n", o);
+    }
+
+    return 0;
 }
 
 //学習データ読み込み
